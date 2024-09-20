@@ -6,9 +6,10 @@ const ItemsRouter = express.Router();
 ItemsRouter.get("/items", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM items");
-    res.send(result.rows);
+    res.json(result.rows);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

@@ -7,6 +7,7 @@ const categories = ["beer", "coffe", "cocktails"];
 const CategoryList = () => {
   const [data, setData] = useState({});
 
+  // Effect for fetching data from APi
   useEffect(() => {
     axios
       .get(`http://192.168.0.17:3000/items`)
@@ -31,7 +32,7 @@ const CategoryList = () => {
 
   return (
     <>
-      <div className="lg:max-w-4xl mx-auto mt-10 border-2 border-white/20 ">
+      <div className="lg:max-w-4xl mx-auto pt-10   bg-bg2 bg-center bg-cover relative ">
         <div className="flex flex-col space-y-3 px-8 py-4">
           {categories.map((category, index) => {
             return (
@@ -44,6 +45,7 @@ const CategoryList = () => {
             );
           })}
         </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10"></div>
       </div>
     </>
   );

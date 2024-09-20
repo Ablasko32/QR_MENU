@@ -6,6 +6,8 @@ export default {
       backgroundImage: {
         texture:
           "url('https://www.transparenttextures.com/patterns/black-thread.png')",
+        bg1: "url('./bg-1.avif')",
+        bg2: "url('./bg-2.avif')",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

@@ -1,6 +1,7 @@
 import React from "react";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const Socials = () => {
   return (
@@ -16,8 +17,15 @@ const Socials = () => {
             <InstagramIcon fontSize="large" />
           </a>
         </div>
+        <div>
+          <a href="https://www.google.com/">
+            <GoogleIcon fontSize="large" />
+          </a>
+        </div>
       </div>
-      <h2 className="text-center italic font-medium mb-6">Find us!</h2>
+      <div>
+        <h2 className="text-center italic font-medium mb-6">Find us!</h2>
+      </div>
     </>
   );
 };

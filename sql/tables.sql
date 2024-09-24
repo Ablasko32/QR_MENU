@@ -8,6 +8,19 @@ CREATE TABLE items(
   category VARCHAR(20) NOT NULL
 );
 
+
+CREATE TABLE users(
+
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50),
+  password VARCHAR(100)
+);
+
+INSERT into USERS
+(username,password)
+VALUES
+('coffe-bar','banana');
+
 INSERT INTO items
 (name,quantity,price,category)
 VALUES

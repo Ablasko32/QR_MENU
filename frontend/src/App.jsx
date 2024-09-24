@@ -1,21 +1,19 @@
 import React from "react";
-import CategoryList from "./components/CategoryList";
-import Socials from "./components/Socials";
-import Header from "./components/Header";
-import Disclaimer from "./components/Disclaimer";
-import WorkingHours from "./components/WorkingHours";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// sites
+import CoffeeExample from "./components/Sites/ExampleCoffe";
+import LoginPanel from "./components/Sites/LoginPanel";
+import Dahsboard from "./components/Sites/Dashboard";
 
 function App() {
   return (
-    <>
-      <Header />
-      <CategoryList />
-      <Socials />
-      <WorkingHours />
-      <Disclaimer />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/coffe-example1" element={<CoffeeExample />} />
+        <Route path="/admin" element={<LoginPanel />} />
+        <Route path="/dashboard" element={<Dahsboard />} />
+      </Routes>
+    </Router>
   );
 }
 

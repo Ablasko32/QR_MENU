@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import ItemsRouter from "./Routes/ItemsRouter.js";
 import AdminRouter from "./Routes/AdminRouter.js";
+import DashboardRouter from "./Routes/DashboardRouter.js";
 
 const app = express();
 app.use(
@@ -18,6 +19,7 @@ app.use(express.json());
 // routes
 app.use("/", ItemsRouter);
 app.use("/", AdminRouter);
+app.use("/", DashboardRouter);
 
 app.listen(3000, () => {
   console.log("running on 3000");

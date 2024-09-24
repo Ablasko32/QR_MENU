@@ -10,7 +10,7 @@ const CategoryList = () => {
   // Effect for fetching data from APi
   useEffect(() => {
     axios
-      .get(`http://192.168.0.17:3000/items`)
+      .get(`http://192.168.0.17:3000/items/2`)
       .then((res) => {
         const recivedData = res.data;
         // filtering data to object where category is key

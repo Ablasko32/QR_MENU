@@ -6,8 +6,6 @@ import jwt from "jsonwebtoken";
 const AdminRouter = express.Router();
 
 AdminRouter.post("/login", async (req, res) => {
-  // change this secret
-  const JWT_SECRET = "SECRET";
   const { username, password } = req.body;
   try {
     const result = await db.query("SELECT * FROM users WHERE username=$1", [
@@ -20,7 +18,7 @@ AdminRouter.post("/login", async (req, res) => {
       if (isMatch) {
         const token = jwt.sign(
           { id: user.id, username: user.username },
-          JWT_SECRET,
+          process.env.JWT_SECRET,
           { expiresIn: "1h" }
         );
         res.json({ message: "Login sucess", token });

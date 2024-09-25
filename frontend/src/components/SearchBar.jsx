@@ -1,16 +1,15 @@
 import React from "react";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
     <div className="p-4 relative ">
-      <form className="flex space-x-2">
-        <input
-          type="search"
-          placeholder="Unesi naziv"
-          className="p-1 rounded-md opacity-75"
-        ></input>
-        <input type="submit" value="Traži" />
-      </form>
+      <input
+        onChange={(event) => props.handleSearch(event)}
+        value={props.searchTerm}
+        type="search"
+        placeholder="Unesi naziv"
+        className="p-1 rounded-md opacity-75 text-gray-500"
+      ></input>
     </div>
   );
 };

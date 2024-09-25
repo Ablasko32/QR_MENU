@@ -11,19 +11,25 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
+    console.log("effect");
+
     fetchDashboardData(currentPage);
-  }, [currentPage]);
+  }, [currentPage, searchTerm]);
 
   const fetchDashboardData = (page) => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://192.168.0.17:3000/dashboard?page=" + page || 1, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        `http://192.168.0.17:3000/dashboard?page=${page}&searchTerm=${searchTerm}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setData(res.data.data);
       })
@@ -57,6 +63,12 @@ const Dashboard = () => {
     }
   };
 
+  // search
+  const handleSearchInput = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+  };
+
   return (
     <>
       <div className="bg-bgdash bg-center bg-cover  overflow-scroll min-h-screen relative pb-10">
@@ -68,7 +80,8 @@ const Dashboard = () => {
         </div>
 
         <DropdownMenu />
-        <SearchBar />
+        <SearchBar searchTerm={searchTerm} handleSearch={handleSearchInput} />
+
         {/* border divider */}
         <div className="border-b-4 mb-4"></div>
 

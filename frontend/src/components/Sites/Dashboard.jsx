@@ -4,33 +4,40 @@ import DropdownMenu from "../DropdownMenu";
 import SearchBar from "../SearchBar";
 import IndividualDashboardItem from "../IndividualDashboardItem";
 import DrinkIconList from "../DrinkIconList";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    fetchDashboardData(currentPage);
+  }, [currentPage]);
+
+  const fetchDashboardData = (page) => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://192.168.0.17:3000/dashboard", {
+      .get("http://192.168.0.17:3000/dashboard?page=" + page || 1, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        setData(res.data);
+        setData(res.data.data);
       })
       .catch((err) => {
         setError(err.response.data.error);
       })
       .finally(console.log("Running"));
-  }, []);
+  };
 
   const handleDelete = (id) => {
     const confirmed = window.confirm("Are you sure you want to delete item?");
     if (confirmed) {
       axios
-        .delete("http://192.168.0.17:3000/items/" + id, {
+        .delete("http://192.168.0.17:3000/items/" + id + 1, {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
@@ -39,6 +46,19 @@ const Dashboard = () => {
           console.log(res.data);
           setData((prevValue) => prevValue.filter((item) => item.id !== id));
         });
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    const dataLength = data.length;
+    if (dataLength === 0) {
+      setCurrentPage((prevpage) => prevpage - 1);
+    } else {
+      if (newPage === "plus") {
+        setCurrentPage((prevpage) => prevpage + 1);
+      } else {
+        setCurrentPage((prevpage) => prevpage - 1);
+      }
     }
   };
 
@@ -68,6 +88,20 @@ const Dashboard = () => {
               />
             );
           })}
+        </div>
+        {/* pagination
+         */}
+
+        <div className="flex justify-center space-x-3 mt-10 relative items-center">
+          {currentPage > 1 && (
+            <button onClick={() => handlePageChange("minus")}>
+              <NavigateBeforeIcon fontSize="large" />
+            </button>
+          )}
+          <div>{currentPage}</div>
+          <button onClick={() => handlePageChange("plus")}>
+            <NavigateNextIcon fontSize="large" />
+          </button>
         </div>
       </div>
     </>

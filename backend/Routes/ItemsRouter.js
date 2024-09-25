@@ -1,9 +1,7 @@
 import express from "express";
 import { db } from "../config/config.js";
 import jwtAuthMiddlewere from "../middleware/jwtAuthMiddlewere.js";
-import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "SECRET";
 const ItemsRouter = express.Router();
 
 ItemsRouter.get("/items/:id", async (req, res) => {

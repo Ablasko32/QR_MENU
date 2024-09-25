@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DropdownMenu from "../DropdownMenu";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import SearchBar from "../SearchBar";
+import IndividualDashboardItem from "../IndividualDashboardItem";
+import DrinkIconList from "../DrinkIconList";
 
-const Dahsboard = () => {
+const Dashboard = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,49 +44,34 @@ const Dahsboard = () => {
 
   return (
     <>
-      <div className="bg-bglogin bg-center bg-cover h-screen">
-        {error && <p className="text-center text-red-400 pt-20">{error}</p>}
-        {!error && (
-          <h1 className="mb-10 pt-10 text-center text-3xl font-lobster">
-            Update your menu here!
-          </h1>
-        )}
+      <div className="bg-bgdash bg-center bg-cover  overflow-scroll min-h-screen relative pb-10">
+        <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-black/20 to-black  "></div>
+
+        <div className="flex flex-col items-center  pt-10 mb-12">
+          <DrinkIconList />
+          <h1 className=" opacity-75 text-2xl font-bold">Administracija</h1>
+        </div>
 
         <DropdownMenu />
+        <SearchBar />
+        {/* border divider */}
+        <div className="border-b-4 mb-4"></div>
 
-        <div className="container mx-auto p-4">
-          <table className="w-full text-center">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{item.name}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.price}</td>
-                    <td>{item.category}</td>
-                    <td onClick={() => navigate("/edit", { state: { item } })}>
-                      <EditIcon />
-                    </td>
-                    <td onClick={() => handleDelete(item.id)}>
-                      <DeleteIcon />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        {/* items display */}
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4   relative ">
+          {data.map((item, index) => {
+            return (
+              <IndividualDashboardItem
+                handleDelete={handleDelete}
+                item={item}
+                key={index}
+              />
+            );
+          })}
         </div>
       </div>
     </>
   );
 };
 
-export default Dahsboard;
+export default Dashboard;

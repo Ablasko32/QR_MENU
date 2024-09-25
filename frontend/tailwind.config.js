@@ -9,6 +9,7 @@ export default {
         bg1: "url('./bg-1.avif')",
         bg2: "url('./bg-2.avif')",
         bglogin: "url('./bg-login.jpg')",
+        bgdash: "url('./bg-dash.jpg')",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

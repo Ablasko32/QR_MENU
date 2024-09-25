@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-// icons
-import CoffeeIcon from "@mui/icons-material/Coffee";
-import WineBarIcon from "@mui/icons-material/WineBar";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
+import DrinkIconList from "../DrinkIconList";
 
 const LoginPanel = () => {
   // navigation
@@ -50,15 +46,12 @@ const LoginPanel = () => {
 
   return (
     <>
-      <div className="bg-bglogin bg-center bg-cover">
-        <div className="container mx-auto max-w-xl  p-4 flex flex-col h-screen justify-center ">
-          <div className="flex justify-center space-x-2">
-            <CoffeeIcon />
-            <WineBarIcon />
-            <LocalBarIcon />
-          </div>
+      <div className="bg-bgdash bg-center bg-cover relative">
+        <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-transparent to-black  "></div>
+        <div className="container mx-auto max-w-xl  p-4 flex flex-col h-screen justify-center relative ">
+          <DrinkIconList />
           <h2 className="text-center mt-3 mb-6">
-            Welcome to QRMenu {formData.username}
+            Dobrodošli na QRMenu {formData.username}
           </h2>
           {errorMessage && (
             <p className="text-center text-sm mb-2 text-red-500">
@@ -84,7 +77,7 @@ const LoginPanel = () => {
             ></input>
             <input
               type="submit"
-              value="Login"
+              value="Prijavi se"
               className="text-xl border-b border-slate-100 mx-auto cursor-pointer font-semibold"
             ></input>
           </form>

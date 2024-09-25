@@ -57,7 +57,17 @@ ItemsRouter.patch("/items/:id", async (req, res) => {
   const item_id = req.params.id;
   const { name, quantity, price } = req.body;
   console.log(item_id, name, quantity, price);
-  res.json({ message: "alive" });
+
+  try {
+    await db.query(
+      "UPDATE items SET name=$1, quantity=$2, price=$3 WHERE id=$4",
+      [name, quantity, price, item_id]
+    );
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error, please try again" });
+  }
 });
 
 export default ItemsRouter;

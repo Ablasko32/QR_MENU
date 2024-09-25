@@ -4,8 +4,9 @@ import PrivateRoute from "./components/PrivateRoute";
 // sites
 import CoffeeExample from "./components/Sites/ExampleCoffe";
 import LoginPanel from "./components/Sites/LoginPanel";
-import Dahsboard from "./components/Sites/Dashboard";
+import Dashboard from "./components/Sites/Dashboard";
 import EditItem from "./components/Sites/EditItem";
+import NotFoundDefault from "./components/Sites/NotFoundDefault";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dahsboard />
+              <Dashboard />
             </PrivateRoute>
           }
         />
@@ -29,6 +30,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<NotFoundDefault />} />
       </Routes>
     </Router>
   );

@@ -50,15 +50,10 @@ const Dashboard = () => {
   };
 
   const handlePageChange = (newPage) => {
-    const dataLength = data.length;
-    if (dataLength === 0) {
-      setCurrentPage((prevpage) => prevpage - 1);
+    if (newPage === "plus") {
+      setCurrentPage((prevpage) => prevpage + 1);
     } else {
-      if (newPage === "plus") {
-        setCurrentPage((prevpage) => prevpage + 1);
-      } else {
-        setCurrentPage((prevpage) => prevpage - 1);
-      }
+      setCurrentPage((prevpage) => prevpage - 1);
     }
   };
 
@@ -99,9 +94,11 @@ const Dashboard = () => {
             </button>
           )}
           <div>{currentPage}</div>
-          <button onClick={() => handlePageChange("plus")}>
-            <NavigateNextIcon fontSize="large" />
-          </button>
+          {data.length !== 0 && (
+            <button onClick={() => handlePageChange("plus")}>
+              <NavigateNextIcon fontSize="large" />
+            </button>
+          )}
         </div>
       </div>
     </>

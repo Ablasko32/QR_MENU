@@ -9,7 +9,7 @@ DashboardRouter.get("/dashboard", jwtAuthMiddlewere, async (req, res) => {
   let queryParams = [userId];
   let baseQuery = "SELECT * FROM items WHERE user_id=$1";
   // pagination
-  const LIMIT = 3;
+  const LIMIT = 6;
   const page = parseInt(req.query.page) || 1;
   console.log(page);
 

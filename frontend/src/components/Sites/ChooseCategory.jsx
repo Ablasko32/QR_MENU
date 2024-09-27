@@ -20,9 +20,14 @@ const ChooseCategory = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("token");
 
     axios
-      .post("http://192.168.0.17:3000/categories", { name: formData })
+      .post(
+        "http://192.168.0.17:3000/categories",
+        { name: formData },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((res) => {
         console.log(res.data);
       });
@@ -35,9 +40,14 @@ const ChooseCategory = () => {
   };
 
   useEffect(() => {
-    axios.get("http://192.168.0.17:3000/categories").then((res) => {
-      setCategories(res.data);
-    });
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://192.168.0.17:3000/categories", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setCategories(res.data);
+      });
   }, [rennderDependancy]);
 
   return (

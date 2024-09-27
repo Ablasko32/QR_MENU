@@ -20,9 +20,9 @@ CREATE TABLE users(
 
 CREATE table categories(
   id SERIAL PRIMARY KEY,
-  name VARCHAR(50)
+  name VARCHAR(50),
+ user_id INTEGER REFERENCES users(id)
 );
-
 
 INSERT into USERS
 (username,password)

@@ -6,8 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const CategoriesIndividualItem = (props) => {
   const handleDelete = (id) => {
+    const token = localStorage.getItem("token");
     axios
-      .delete("http://192.168.0.17:3000/categories/" + id)
+      .delete("http://192.168.0.17:3000/categories/" + id, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(res.data);
         props.setRenderDependancy(true);

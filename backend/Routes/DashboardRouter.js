@@ -5,6 +5,8 @@ import jwtAuthMiddlewere from "../middleware/jwtAuthMiddlewere.js";
 const DashboardRouter = express.Router();
 
 DashboardRouter.get("/dashboard", jwtAuthMiddlewere, async (req, res) => {
+  console.log(req.query.category);
+
   const searchTerm = req.query.searchTerm.toString();
   const userId = req.user.id;
   let queryParams = [userId];

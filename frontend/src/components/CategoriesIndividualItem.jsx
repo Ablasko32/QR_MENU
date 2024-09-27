@@ -5,6 +5,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 
 const CategoriesIndividualItem = (props) => {
+  const navigate = useNavigate();
+
   const handleDelete = (id) => {
     const token = localStorage.getItem("token");
     axios
@@ -24,7 +26,11 @@ const CategoriesIndividualItem = (props) => {
     <div className="bg-white/20 p-4 w-1/2 rounded-md backdrop-blur-sm flex justify-between max-w-lg">
       <p> {props.item.name}</p>
       <div className="flex space-x-2">
-        <p>
+        <p
+          onClick={() => {
+            navigate(`/dashboard/${props.item.name}`);
+          }}
+        >
           <EditIcon />
         </p>
         <p onClick={() => handleDelete(props.item.id)}>

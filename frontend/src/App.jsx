@@ -17,7 +17,7 @@ function App() {
         <Route path="/admin" element={<LoginPanel />} />
         <Route path="/category" element={<ChooseCategory />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/:category"
           element={
             <PrivateRoute>
               <Dashboard />

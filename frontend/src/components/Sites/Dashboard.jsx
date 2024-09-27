@@ -6,8 +6,10 @@ import IndividualDashboardItem from "../IndividualDashboardItem";
 import DrinkIconList from "../DrinkIconList";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { useParams } from "react-router-dom";
 
 const Dashboard = () => {
+  const { category } = useParams();
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +25,7 @@ const Dashboard = () => {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `http://192.168.0.17:3000/dashboard?page=${page}&searchTerm=${searchTerm}`,
+        `http://192.168.0.17:3000/dashboard?page=${page}&searchTerm=${searchTerm}&category=${category}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

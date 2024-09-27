@@ -42,7 +42,7 @@ const DropdownMenu = (props) => {
       .then((res) => {
         console.log(res.data);
 
-        props.handleRender(true);
+        props.handleRender(!props.reRender);
 
         navigate(`/dashboard/${props.category}`);
       });

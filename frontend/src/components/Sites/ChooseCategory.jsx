@@ -10,7 +10,6 @@ const ChooseCategory = () => {
   const [rennderDependancy, setRenderDependancy] = useState(false);
   const [categories, setCategories] = useState([]);
   const origin = window.location.origin;
-  console.log(origin);
 
   const token = localStorage.getItem("token");
   const user = jwtDecode(token).username;
@@ -39,22 +38,24 @@ const ChooseCategory = () => {
         console.log(res.data);
       });
 
-    setCategories((prevValue) => {
-      return [...prevValue, formData];
-    });
+    fetchCategories();
     setFormData("");
     setRenderDependancy(!rennderDependancy);
   };
 
-  useEffect(() => {
+  const fetchCategories = () => {
     const token = localStorage.getItem("token");
     axios
       .get("http://192.168.0.17:3000/categories", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setCategories(res.data);
+        setCategories(res.data); // Update categories from the response
       });
+  };
+
+  useEffect(() => {
+    fetchCategories();
   }, [rennderDependancy]);
 
   return (
@@ -107,6 +108,7 @@ const ChooseCategory = () => {
           {categories.map((item, index) => {
             return (
               <CategoriesIndividualItem
+                rennderDependancy={rennderDependancy}
                 setRenderDependancy={setRenderDependancy}
                 id={item.id}
                 key={index}

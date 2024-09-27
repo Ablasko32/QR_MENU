@@ -6,6 +6,7 @@ import IndividualDashboardItem from "../IndividualDashboardItem";
 import DrinkIconList from "../DrinkIconList";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useParams } from "react-router-dom";
 
 const Dashboard = () => {
@@ -82,9 +83,16 @@ const Dashboard = () => {
           <h1 className=" opacity-75 text-2xl font-bold">
             Administracija {category}
           </h1>
+          <a href="/category" className="absolute top-4 left-4">
+            <ArrowBackIcon />
+          </a>
         </div>
 
-        <DropdownMenu handleRender={setRerender} category={category} />
+        <DropdownMenu
+          reRender={reRender}
+          handleRender={setRerender}
+          category={category}
+        />
 
         {/* border divider */}
         <div className="border-b-4 mb-4"></div>

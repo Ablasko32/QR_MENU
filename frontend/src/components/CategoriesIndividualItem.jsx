@@ -15,7 +15,7 @@ const CategoriesIndividualItem = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        props.setRenderDependancy(true);
+        props.setRenderDependancy(!props.rennderDependancy);
       })
       .catch((err) => {
         console.log(err);

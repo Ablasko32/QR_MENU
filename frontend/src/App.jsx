@@ -7,6 +7,7 @@ import LoginPanel from "./components/Sites/LoginPanel";
 import Dashboard from "./components/Sites/Dashboard";
 import EditItem from "./components/Sites/EditItem";
 import NotFoundDefault from "./components/Sites/NotFoundDefault";
+import ChooseCategory from "./components/Sites/ChooseCategory";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/coffe-example1" element={<CoffeeExample />} />
         <Route path="/admin" element={<LoginPanel />} />
+        <Route path="/category" element={<ChooseCategory />} />
         <Route
           path="/dashboard"
           element={

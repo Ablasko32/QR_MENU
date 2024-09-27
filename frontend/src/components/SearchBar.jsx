@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchBar = (props) => {
   return (
-    <div className="p-4 relative ">
+    <div className="ml-10 pb-4 relative ">
       <input
         onChange={(event) => props.handleSearch(event)}
         value={props.searchTerm}

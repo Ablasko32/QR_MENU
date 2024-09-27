@@ -17,6 +17,13 @@ CREATE TABLE users(
   password VARCHAR(100)
 );
 
+
+CREATE table categories(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+
 INSERT into USERS
 (username,password)
 VALUES

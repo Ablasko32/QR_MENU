@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const DropdownMenu = () => {
+const DropdownMenu = (props) => {
   const [isOpen, setOpen] = useState(false);
 
   const [buttonText, setButtonText] = useState("Novi unos");
@@ -18,7 +18,7 @@ const DropdownMenu = () => {
     name: "",
     quantity: "",
     price: "",
-    category: "",
+    category: props.category,
   });
 
   const handleFormEntry = (event) => {
@@ -41,27 +41,28 @@ const DropdownMenu = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setOpen(false);
-        window.location.reload();
-        navigate("/dashboard");
+
+        props.handleRender(true);
+
+        navigate(`/dashboard/${props.category}`);
       });
   };
 
   return (
-    <div className="flex flex-col justify-center mb-5 relative ">
+    <div className="relative mt-10 flex flex-col items-start ">
       <button
         onClick={handleOpen}
-        className=" bg-white/70 text-xl font-semibold text-gray-500  text-black mx-auto p-2 px-3 rounded-md  backdrop-blur-md"
+        className=" bg-white/10 p-4 rounded-md ml-10 mb-2 font-semibold backdrop-blur-sm  "
       >
         {buttonText}
       </button>
 
       {/* dropdown form */}
       {isOpen && (
-        <div className="container mx-auto mt-2 max-w-xl">
+        <div className="bg-white/10 py-6 px-2 flex ml-10 rounded-md backdrop-blur-sm">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col px-8 space-y-1 text-gray-500"
+            className="flex flex-col items-start space-y-2"
           >
             <input
               value={formData.name}
@@ -69,7 +70,7 @@ const DropdownMenu = () => {
               onChange={handleFormEntry}
               type="text"
               placeholder="Unesi naziv"
-              className="p-2 rounded-md focus:ring-purple-900 opacity-70"
+              className="p-2 rounded-md focus:ring-purple-900 opacity-70 text-gray-500"
             />
             <input
               value={formData.quantity}
@@ -77,7 +78,7 @@ const DropdownMenu = () => {
               onChange={handleFormEntry}
               type="text"
               placeholder="Unesi količinu (0,33)"
-              className="p-2 rounded-md focus:ring-purple-900 opacity-70"
+              className="p-2 rounded-md focus:ring-purple-900 opacity-70 text-gray-500"
             />
             <input
               value={formData.price}
@@ -85,9 +86,9 @@ const DropdownMenu = () => {
               onChange={handleFormEntry}
               type="number"
               placeholder="Unesi cijenu (4.50)"
-              className="p-2 rounded-md focus:ring-purple-900 opacity-70"
+              className="p-2 rounded-md focus:ring-purple-900 opacity-70 text-gray-500"
             />
-            <select
+            {/* <select
               value={formData.category}
               name="category"
               className="p-2 rounded-md  focus:ring-purple-900 opacity-70 "
@@ -99,7 +100,7 @@ const DropdownMenu = () => {
               <option value="beer">Beer</option>
               <option value="cocktails">Cocktails</option>
               <option value="coffe">Coffe</option>
-            </select>
+            </select> */}
             {/* <input
               name="category"
               onChange={handleFormEntry}
@@ -110,7 +111,7 @@ const DropdownMenu = () => {
             <input
               type="submit"
               value="Spremi"
-              className="bg-white/70 font-semibold text-xl p-1 mx-auto rounded-md "
+              className="bg-white/20 rounded-lg px-2 py-1 "
             ></input>
           </form>
         </div>

@@ -5,13 +5,13 @@ import jwtAuthMiddlewere from "../middleware/jwtAuthMiddlewere.js";
 const DashboardRouter = express.Router();
 
 DashboardRouter.get("/dashboard", jwtAuthMiddlewere, async (req, res) => {
-  console.log(req.query.category);
+  const category = req.query.category;
 
   const searchTerm = req.query.searchTerm.toString();
   const userId = req.user.id;
-  let queryParams = [userId];
+  let queryParams = [userId, category];
   let searchQuery = "";
-  let baseQuery = "SELECT * FROM items WHERE user_id=$1";
+  let baseQuery = "SELECT * FROM items WHERE user_id=$1 AND category=$2";
   console.log(searchTerm);
 
   // pagination
@@ -22,10 +22,10 @@ DashboardRouter.get("/dashboard", jwtAuthMiddlewere, async (req, res) => {
 
   queryParams.push(LIMIT, offset);
 
-  const paginationQuerry = ` LIMIT $2 OFFSET $3`;
+  const paginationQuerry = ` LIMIT $3 OFFSET $4`;
 
   if (searchTerm) {
-    const searchQuery = " AND name ILIKE ($4) ";
+    const searchQuery = " AND name ILIKE ($5) ";
     baseQuery += searchQuery;
     queryParams.push(`%${searchTerm}%`);
   }

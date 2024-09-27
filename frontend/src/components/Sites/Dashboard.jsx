@@ -14,12 +14,13 @@ const Dashboard = () => {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [reRender, setRerender] = useState(false);
 
   useEffect(() => {
     console.log("effect");
 
     fetchDashboardData(currentPage);
-  }, [currentPage, searchTerm]);
+  }, [currentPage, searchTerm, reRender]);
 
   const fetchDashboardData = (page) => {
     const token = localStorage.getItem("token");
@@ -45,7 +46,7 @@ const Dashboard = () => {
     const confirmed = window.confirm("Are you sure you want to delete item?");
     if (confirmed) {
       axios
-        .delete("http://192.168.0.17:3000/items/" + id + 1, {
+        .delete("http://192.168.0.17:3000/items/" + id, {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
@@ -73,20 +74,21 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-bgdash bg-center bg-cover  overflow-scroll min-h-screen relative pb-10">
+      <div className="bg-[url('../bg-dash.jpg')] bg-center bg-cover  overflow-scroll min-h-screen relative pb-10">
         <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-black/20 to-black  "></div>
 
         <div className="flex flex-col items-center  pt-10 mb-12">
           <DrinkIconList />
-          <h1 className=" opacity-75 text-2xl font-bold">Administracija</h1>
+          <h1 className=" opacity-75 text-2xl font-bold">
+            Administracija {category}
+          </h1>
         </div>
 
-        <DropdownMenu />
-        <SearchBar searchTerm={searchTerm} handleSearch={handleSearchInput} />
+        <DropdownMenu handleRender={setRerender} category={category} />
 
         {/* border divider */}
         <div className="border-b-4 mb-4"></div>
-
+        <SearchBar searchTerm={searchTerm} handleSearch={handleSearchInput} />
         {/* items display */}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4   relative ">
           {data.map((item, index) => {

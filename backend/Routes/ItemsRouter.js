@@ -40,6 +40,8 @@ ItemsRouter.delete("/items/:id", jwtAuthMiddlewere, async (req, res) => {
       item_id,
     ]);
     if (doesItemExist) {
+      console.log("hit-delete");
+
       await db.query("DELETE FROM items WHERE id=$1", [item_id]);
       res.sendStatus(201);
     } else {

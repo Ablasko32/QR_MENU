@@ -31,12 +31,12 @@ const EditItem = () => {
       .then((res) => {
         console.log(res.data);
       });
-    navigate("/dashboard");
+    navigate(`/dashboard/${item.category}`);
   };
 
   return (
     <>
-      <div className="h-screen flex justify-center items-center bg-bgdash bg-center bg-cover relative">
+      <div className="h-screen flex justify-center items-center bg-[url('../bg-dash.jpg')] bg-center bg-cover relative">
         <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-black/20 to-black  "></div>
         <div className="container mx-auto p-4 flex justify-center relative ">
           <form

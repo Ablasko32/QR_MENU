@@ -34,7 +34,7 @@ const LoginPanel = () => {
       );
       console.log(response.data);
       localStorage.setItem("token", response.data.token);
-      navigate("/dashboard");
+      navigate("/category");
     } catch (err) {
       if (err.response) {
         setErrorMessage(err.response.data.error);

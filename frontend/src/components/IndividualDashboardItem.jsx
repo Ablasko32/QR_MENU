@@ -9,7 +9,7 @@ const IndividualDashboardItem = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white/10 border border-white/20 backdrop-blur-md mx-10 p-2 rounded-md">
+    <div className="bg-white/20  backdrop-blur-sm mx-10 p-2 rounded-md">
       <div className="flex justify-between border-b-2 border-slate-100 ">
         <p className="flex space-x-2">
           <span className="font-semibold">{item.name}</span>

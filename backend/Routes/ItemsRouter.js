@@ -4,14 +4,24 @@ import jwtAuthMiddlewere from "../middleware/jwtAuthMiddlewere.js";
 
 const ItemsRouter = express.Router();
 
-ItemsRouter.get("/items/:id", async (req, res) => {
-  const user_id = req.params.id;
+ItemsRouter.get("/items/:name", async (req, res) => {
+  const userName = req.params.name;
 
   try {
-    const result = await db.query("SELECT * FROM items WHERE user_id=$1", [
-      user_id,
-    ]);
-    res.json(result.rows);
+    const distinctCategories = await db.query(
+      "SELECT DISTINCT category FROM items LEFT JOIN users on items.user_id = users.id WHERE username=$1",
+      [userName]
+    );
+    const categoriesList = distinctCategories.rows;
+    const uniqueCategories = [
+      ...new Set(categoriesList.map((item) => item.category)),
+    ];
+
+    const result = await db.query(
+      "SELECT name,quantity,price,category FROM items LEFT JOIN users ON items.user_id=users.id WHERE username=$1",
+      [userName]
+    );
+    res.json({ data: result.rows, categories: uniqueCategories });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error" });

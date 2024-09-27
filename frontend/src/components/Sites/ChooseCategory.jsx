@@ -36,6 +36,7 @@ const ChooseCategory = () => {
       )
       .then((res) => {
         console.log(res.data);
+        fetchCategories();
       });
 
     fetchCategories();

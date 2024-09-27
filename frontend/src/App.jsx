@@ -8,14 +8,17 @@ import Dashboard from "./components/Sites/Dashboard";
 import EditItem from "./components/Sites/EditItem";
 import NotFoundDefault from "./components/Sites/NotFoundDefault";
 import ChooseCategory from "./components/Sites/ChooseCategory";
+import UserMenu from "./components/Sites/UserMenu";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/coffe-example1" element={<CoffeeExample />} />
+        <Route path="/menu/:name" element={<UserMenu />} />
         <Route path="/admin" element={<LoginPanel />} />
         <Route path="/category" element={<ChooseCategory />} />
+
         <Route
           path="/dashboard/:category"
           element={

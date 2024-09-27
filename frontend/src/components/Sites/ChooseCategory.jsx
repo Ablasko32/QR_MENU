@@ -2,13 +2,20 @@ import React, { useState, useEffect } from "react";
 import CategoriesIndividualItem from "../CategoriesIndividualItem";
 import DrinkIconList from "../DrinkIconList";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const ChooseCategory = () => {
   const [formData, setFormData] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [rennderDependancy, setRenderDependancy] = useState(false);
   const [categories, setCategories] = useState([]);
+  const origin = window.location.origin;
+  console.log(origin);
 
+  const token = localStorage.getItem("token");
+  const user = jwtDecode(token).username;
+
+  const menuUrl = `${origin}/menu/${user}`;
   const handleFormEntry = (event) => {
     const value = event.target.value;
     setFormData(value);
@@ -57,6 +64,9 @@ const ChooseCategory = () => {
         <div className="relative pt-10">
           <DrinkIconList />
           <h2 className="text-center text-xl">Kreiraj svoj menu</h2>
+          <a className="block text-center mt-4 underline" href={menuUrl}>
+            TVOJ MENI
+          </a>
         </div>
 
         <div className="relative mt-10 flex flex-col items-start">

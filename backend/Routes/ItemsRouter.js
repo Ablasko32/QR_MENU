@@ -9,18 +9,22 @@ ItemsRouter.get("/items/:name", async (req, res) => {
 
   try {
     const distinctCategories = await db.query(
-      "SELECT DISTINCT category FROM items LEFT JOIN users on items.user_id = users.id WHERE username=$1",
+      "SELECT DISTINCT categories.name FROM items LEFT JOIN categories ON items.category_id = categories.id  LEFT JOIN users on items.user_id = users.id WHERE username=$1",
       [userName]
     );
+
+    console.log(distinctCategories.rows);
+
     const categoriesList = distinctCategories.rows;
     const uniqueCategories = [
-      ...new Set(categoriesList.map((item) => item.category)),
+      ...new Set(categoriesList.map((item) => item.name)),
     ];
 
     const result = await db.query(
-      "SELECT name,quantity,price,category FROM items LEFT JOIN users ON items.user_id=users.id WHERE username=$1",
+      "SELECT items.name,quantity,price,categories.name AS category FROM items LEFT JOIN categories ON items.category_id = categories.id LEFT JOIN users ON items.user_id=users.id WHERE username=$1",
       [userName]
     );
+
     res.json({ data: result.rows, categories: uniqueCategories });
   } catch (err) {
     console.log(err);

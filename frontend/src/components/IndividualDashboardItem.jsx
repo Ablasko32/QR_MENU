@@ -7,6 +7,7 @@ import axios from "axios";
 const IndividualDashboardItem = (props) => {
   const item = props.item;
   const navigate = useNavigate();
+  console.log(item);
 
   return (
     <div className="bg-white/20  backdrop-blur-sm mx-10 p-2 rounded-md">

@@ -35,6 +35,7 @@ const Dashboard = () => {
         }
       )
       .then((res) => {
+        console.log(data);
         setData(res.data.data);
       })
       .catch((err) => {

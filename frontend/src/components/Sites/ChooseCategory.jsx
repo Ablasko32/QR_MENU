@@ -3,6 +3,11 @@ import CategoriesIndividualItem from "../CategoriesIndividualItem";
 import DrinkIconList from "../DrinkIconList";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import RestaurantOutlinedIcon from "@mui/icons-material/RestaurantOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import LogOut from "../Logout";
 
 const ChooseCategory = () => {
   const [formData, setFormData] = useState("");
@@ -61,15 +66,22 @@ const ChooseCategory = () => {
 
   return (
     <>
-      <div className="bg-bgdash min-h-screen bg-center bg-cover relative">
+      <div className="bg-[url('../bg-dash.jpg')] min-h-screen bg-center bg-cover relative">
         <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-black/20 to-black  "></div>
         <div className="relative pt-10">
           <DrinkIconList />
           <h2 className="text-center text-xl">Kreiraj svoj menu</h2>
-          <a className="block text-center mt-4 underline" href={menuUrl}>
-            TVOJ MENI
-          </a>
+          <div className="flex justify-center space-x-6 items-center mt-4">
+            <Link className="bg-white/10 p-2 rounded-md" to={menuUrl}>
+              <RemoveRedEyeOutlinedIcon />
+            </Link>
+            <Link className="bg-white/10 p-2 rounded-md" to="/restaurant">
+              <RestaurantOutlinedIcon />
+              <SettingsOutlinedIcon />
+            </Link>
+          </div>
         </div>
+        <LogOut />
 
         <div className="relative mt-10 flex flex-col items-start">
           <button
@@ -102,7 +114,7 @@ const ChooseCategory = () => {
           )}
         </div>
         {/* border divider */}
-        <div className="border-b-4 m"></div>
+        <div className="border-b-4 "></div>
 
         {/* categories */}
         <div className="mt-20 relative flex flex-col items-center justify-center space-y-2">

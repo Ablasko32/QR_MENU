@@ -5,6 +5,14 @@ CREATE TABLE users(
   password VARCHAR(100)
 );
 
+CREATE TABLE restaurant(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  working_hours VARCHAR(50),
+  addres VARCHAR(100),
+  user_id INTEGER REFERENCES users(id)  ON DELETE CASCADE UNIQUE
+);
+
 
 CREATE table categories(
   id SERIAL PRIMARY KEY,

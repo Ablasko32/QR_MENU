@@ -10,6 +10,7 @@ import NotFoundDefault from "./components/Sites/NotFoundDefault";
 import ChooseCategory from "./components/Sites/ChooseCategory";
 import UserMenu from "./components/Sites/UserMenu";
 import RegisterPanel from "./components/Sites/RegisterPanel";
+import EditRestaurant from "./components/Sites/EditRestaurant";
 
 function App() {
   return (
@@ -19,7 +20,16 @@ function App() {
         <Route path="/menu/:name" element={<UserMenu />} />
         <Route path="/login" element={<LoginPanel />} />
         <Route path="/register" element={<RegisterPanel />} />
-        <Route path="/category" element={<ChooseCategory />} />
+        <Route path="/restaurant" element={<EditRestaurant />} />
+
+        <Route
+          path="/category"
+          element={
+            <PrivateRoute>
+              <ChooseCategory />
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/dashboard/:category"

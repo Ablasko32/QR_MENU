@@ -5,6 +5,38 @@ import jwt from "jsonwebtoken";
 
 const AdminRouter = express.Router();
 
+AdminRouter.post("/register", async (req, res) => {
+  console.log(req.body);
+
+  const { username, password } = req.body;
+  try {
+    const doesUserExist = await db.query(
+      "SELECT * FROM users WHERE username=$1",
+      [username]
+    );
+
+    if (doesUserExist.rows.length === 0) {
+      const hashedPassword = bcrypt.hashSync(password, 12);
+      const result = await db.query(
+        "INSERT INTO users(username,password) VALUES ($1,$2) RETURNING *",
+        [username, hashedPassword]
+      );
+      const user = result.rows[0];
+
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res.status(201).json({ message: "User registred", token });
+    } else {
+      console.log("User already exists");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 AdminRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {

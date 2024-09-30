@@ -1,17 +1,5 @@
-CREATE TABLE items(
-
-
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  quantity VARCHAR(20),
-  price DECIMAL(10,2) NOT NULL,
-  category VARCHAR(20) NOT NULL,
-  user_id INTEGER REFERENCES(users.id)
-);
-
-
+-- EXECUTE IN ORDER
 CREATE TABLE users(
-
   id SERIAL PRIMARY KEY,
   username VARCHAR(50),
   password VARCHAR(100)
@@ -21,8 +9,21 @@ CREATE TABLE users(
 CREATE table categories(
   id SERIAL PRIMARY KEY,
   name VARCHAR(50),
- user_id INTEGER REFERENCES users(id)
+ user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
+
+
+
+CREATE TABLE items(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  quantity VARCHAR(20),
+  price DECIMAL(10,2) NOT NULL,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES  users(id) ON DELETE CASCADE
+);
+
+
 
 INSERT into USERS
 (username,password)

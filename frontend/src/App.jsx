@@ -9,6 +9,7 @@ import EditItem from "./components/Sites/EditItem";
 import NotFoundDefault from "./components/Sites/NotFoundDefault";
 import ChooseCategory from "./components/Sites/ChooseCategory";
 import UserMenu from "./components/Sites/UserMenu";
+import RegisterPanel from "./components/Sites/RegisterPanel";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       <Routes>
         <Route path="/coffe-example1" element={<CoffeeExample />} />
         <Route path="/menu/:name" element={<UserMenu />} />
-        <Route path="/admin" element={<LoginPanel />} />
+        <Route path="/login" element={<LoginPanel />} />
+        <Route path="/register" element={<RegisterPanel />} />
         <Route path="/category" element={<ChooseCategory />} />
 
         <Route

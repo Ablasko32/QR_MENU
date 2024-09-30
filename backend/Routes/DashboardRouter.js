@@ -11,7 +11,8 @@ DashboardRouter.get("/dashboard", jwtAuthMiddlewere, async (req, res) => {
   const userId = req.user.id;
   let queryParams = [userId, category];
   let searchQuery = "";
-  let baseQuery = "SELECT * FROM items WHERE user_id=$1 AND category=$2";
+  let baseQuery =
+    "SELECT * FROM items LEFT join categories ON items.category_id=categories.id WHERE items.user_id=$1 AND categories.name=$2";
   console.log(searchTerm);
 
   // pagination

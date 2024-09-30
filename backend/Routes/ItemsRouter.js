@@ -32,9 +32,14 @@ ItemsRouter.post("/items", jwtAuthMiddlewere, async (req, res) => {
   const { name, quantity, price, category } = req.body;
   const id = req.user.id;
   try {
+    const categoryQuery = await db.query(
+      "SELECT id,name FROM categories WHERE name=$1",
+      [category]
+    );
+    const categoryId = categoryQuery.rows[0].id;
     await db.query(
-      "INSERT INTO items(name,quantity,price,category,user_id) VALUES ($1,$2,$3,$4,$5)",
-      [name, quantity, price, category, id]
+      "INSERT INTO items(name,quantity,price,category_id,user_id) VALUES ($1,$2,$3,$4,$5)",
+      [name, quantity, price, categoryId, id]
     );
     res.sendStatus(200);
   } catch (err) {
